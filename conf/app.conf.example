@@ -7,6 +7,6 @@ EnableDocs = true
 
 
 mysqluser = "root"
-mysqlpass = "chao123"
+mysqlpass = ""
 mysqlhost = "db"
-mysqldb   = "mydev"
+mysqldb   = "beego"

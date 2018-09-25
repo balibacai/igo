@@ -1,5 +1,7 @@
 .idea
 
+conf/app.conf
+
 vendor/*
 !vendor/vendor.json
 

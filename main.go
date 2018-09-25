@@ -4,7 +4,20 @@ import (
 	_ "beego/routers"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/orm"
+	_ "github.com/go-sql-driver/mysql"
+	"fmt"
 )
+
+func init() {
+	mysqluser := beego.AppConfig.String("mysqluser")
+	mysqlpass := beego.AppConfig.String("mysqlpass")
+	mysqlhost := beego.AppConfig.String("mysqlhost")
+	mysqldb := beego.AppConfig.String("mysqldb")
+	ds := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", mysqluser, mysqlpass, mysqlhost, mysqldb)
+
+	orm.RegisterDataBase("default", "mysql", ds)
+}
 
 func main() {
 	if beego.BConfig.RunMode == "dev" {
@@ -13,3 +26,4 @@ func main() {
 	}
 	beego.Run()
 }
+
