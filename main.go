@@ -7,6 +7,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"fmt"
+	"time"
 )
 
 func init() {
@@ -17,6 +18,8 @@ func init() {
 	ds := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", mysqluser, mysqlpass, mysqlhost, mysqldb)
 
 	orm.RegisterDataBase("default", "mysql", ds)
+	orm.DefaultTimeLoc = time.UTC
+	orm.Debug = beego.AppConfig.DefaultBool("orm.debug", false)
 }
 
 func main() {

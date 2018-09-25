@@ -10,8 +10,8 @@ import (
 )
 
 type User struct {
-	Id       int64  `orm:"auto"`
-	Email    string `orm:"size(128)"`
+	Id       int64  `orm:"pk;auto"`
+	Email    string `orm:"unique;size(128)"`
 	Password string `orm:"size(128)"`
 }
 
