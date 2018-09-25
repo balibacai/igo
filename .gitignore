@@ -1,5 +1,11 @@
 .idea
-vendor/*
 
+vendor/*
 !vendor/vendor.json
+
+beego
+*.tmp
+
+routers/*
+!routers/router.go
 
