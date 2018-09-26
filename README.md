@@ -29,3 +29,9 @@ bee migrate -driver="mysql" -conn="$MYSQL_USERNAME:$MYSQL_PASSWORD@tcp(db:3306)/
 
 ```
 
+# test
+```
+go test -v tests/jwt_test.go
+
+```
+
