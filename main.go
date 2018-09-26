@@ -12,11 +12,11 @@ import (
 )
 
 func init() {
-	mysqluser := beego.AppConfig.String("mysqluser")
-	mysqlpass := beego.AppConfig.String("mysqlpass")
-	mysqlhost := beego.AppConfig.String("mysqlhost")
-	mysqldb := beego.AppConfig.String("mysqldb")
-	ds := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", mysqluser, mysqlpass, mysqlhost, mysqldb)
+	mysqlUser := beego.AppConfig.String("mysqlUser")
+	mysqlPass := beego.AppConfig.String("mysqlPass")
+	mysqlHost := beego.AppConfig.String("mysqlHost")
+	mysqlDatabase := beego.AppConfig.String("mysqlDatabase")
+	ds := fmt.Sprintf("%s:%s@tcp(%s:3306)/%s", mysqlUser, mysqlPass, mysqlHost, mysqlDatabase)
 
 	orm.RegisterDataBase("default", "mysql", ds)
 	orm.DefaultTimeLoc = time.UTC

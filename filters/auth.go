@@ -19,7 +19,21 @@ type LoginClaims struct {
 
 func Auth(ctx *context.Context) {
 	tokenString := ctx.Input.Header("token")
-	//fmt.Println("token:" + tokenString)
+
+	//tokenString, err := extensions.NewJWTTokenStringWithClaims(LoginClaims{
+	//	1234567,
+	//	jwt.StandardClaims {
+	//		ExpiresAt: 1537956658,
+	//		Issuer: "test",
+	//	},
+	//})
+	//
+	//if err != nil {
+	//	fmt.Println(err)
+	//	return
+	//}
+
+	fmt.Println("token:" + tokenString)
 
 	_, isExcept := authExcept[ctx.Request.RequestURI]
 	if isExcept {
@@ -31,7 +45,7 @@ func Auth(ctx *context.Context) {
 	//}
 
 	// parse token with claims
-	token, err := extensions.ParseJWTTokenWithClaims(&LoginClaims{}, tokenString)
+	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &LoginClaims{})
 
 	if err != nil {
 		fmt.Println(err)
