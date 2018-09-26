@@ -3,10 +3,11 @@ package main
 import (
 	_ "beego/routers"
 
+	"beego/extensions"
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	"fmt"
 	"time"
 )
 
@@ -20,6 +21,8 @@ func init() {
 	orm.RegisterDataBase("default", "mysql", ds)
 	orm.DefaultTimeLoc = time.UTC
 	orm.Debug = beego.AppConfig.DefaultBool("orm.debug", false)
+
+	extensions.SetJWTSecret(beego.AppConfig.String("jwt.secret"))
 }
 
 func main() {
@@ -29,4 +32,3 @@ func main() {
 	}
 	beego.Run()
 }
-
