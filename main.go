@@ -6,6 +6,7 @@ import (
 	"beego/extensions"
 	"fmt"
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	"time"
@@ -23,6 +24,10 @@ func init() {
 	orm.Debug = beego.AppConfig.DefaultBool("orm.debug", false)
 
 	extensions.SetJWTSecret(beego.AppConfig.String("jwt.secret"))
+
+	// logs config
+	logs.SetLogger(beego.AppConfig.String("log.driver"))
+	logs.SetLevel(beego.AppConfig.DefaultInt("log.level", logs.LevelInfo))
 }
 
 func main() {

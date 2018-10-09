@@ -18,6 +18,11 @@ func init() {
 
 	// routers
 	ns := beego.NewNamespace("/v1",
+		beego.NSNamespace("/login",
+			beego.NSInclude(
+				&controllers.LoginController{},
+			),
+		),
 		beego.NSBefore(filters.Auth),
 		beego.NSNamespace("/user",
 			beego.NSInclude(

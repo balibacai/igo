@@ -10,3 +10,8 @@ mysqluser = "root"
 mysqlpass = ""
 mysqlhost = "db"
 mysqldb   = "beego"
+
+log.driver = "console"
+log.level = 7
+
+jwt.secret = ""
