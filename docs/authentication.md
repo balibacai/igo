@@ -60,3 +60,4 @@ demo如下：
 | 100002 | error occurs when validating login credentials | 
 | 100003 | login credentials invalid |
 | 100004 | error occurs when generating login token |
+| 100005 | user not match |

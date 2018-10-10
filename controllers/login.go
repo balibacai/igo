@@ -8,6 +8,8 @@ import (
 	"beego/extensions"
 	"github.com/dgrijalva/jwt-go"
 	"beego/filters"
+	"beego/models"
+	"beego/requests"
 )
 
 // LoginController operations for Login
@@ -18,11 +20,6 @@ type LoginController struct {
 // URLMapping ...
 func (c *LoginController) URLMapping() {
 	c.Mapping("Post", c.Post)
-}
-
-type LoginCredentials struct {
-	Email string		`form:"email"valid:"Required;Email;MaxSize(32)"`
-	Password string		`form:"password"valid:"Required;MaxSize(64)"`
 }
 
 type JsonResult struct {
@@ -43,7 +40,7 @@ func (c *LoginController) Post() {
 	var result JsonResult
 
 	// login credentials
-	credentials := LoginCredentials{}
+	credentials := requests.LoginCredentials{}
 	if err := c.ParseForm(&credentials); err != nil {
 		result = JsonResult{Error: 100001, Msg: "error occurs when parsing login form"}
 		logs.Error(&result, err)
@@ -75,7 +72,17 @@ func (c *LoginController) Post() {
 
 	// attempt login
 	now := time.Now()
-	userID := int64(1234567)
+	user, err := models.GetUserByCredentials(&credentials)
+
+	if err != nil {
+		result = JsonResult{Error: 100005, Msg: "user not match"}
+		logs.Error(&result, err)
+		c.Data["json"] = &result
+		c.ServeJSON()
+		return
+	}
+
+	userID := user.Id
 	// expired after 30 days
 	expiredAt := now.Unix() + 2592000
 

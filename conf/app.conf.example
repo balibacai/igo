@@ -6,10 +6,10 @@ copyrequestbody = true
 EnableDocs = true
 
 
-mysqluser = "root"
-mysqlpass = ""
-mysqlhost = "db"
-mysqldb   = "beego"
+mysql.user = "root"
+mysql.pass = ""
+mysql.host = "db"
+mysql.database   = "beego"
 
 log.driver = "console"
 log.level = 7
