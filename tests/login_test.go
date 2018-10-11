@@ -14,6 +14,8 @@ import (
 	"strings"
 	"strconv"
 	"beego/bootstrap"
+	"encoding/json"
+	"beego/response"
 )
 
 func init() {
@@ -53,6 +55,17 @@ func TestLoginByCredentials(t *testing.T) {
 		})
 		Convey("The Result Should Not Be Empty", func() {
 			So(w.Body.Len(), ShouldBeGreaterThan, 0)
+		})
+		var result response.JsonResult
+		err := json.Unmarshal([]byte(w.Body.String()), &result)
+
+		Convey("The Result Should be Json Format", func() {
+			So(err, ShouldBeNil)
+		})
+
+		Convey("The Result Should Contain Token And Other Data", func() {
+			So(result.Data, ShouldContainKey, "token")
+			So(result.Data, ShouldContainKey, "expiredAt")
 		})
 	})
 }

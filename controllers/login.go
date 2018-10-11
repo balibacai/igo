@@ -10,6 +10,7 @@ import (
 	"beego/filters"
 	"beego/models"
 	"beego/requests"
+	"beego/response"
 )
 
 // LoginController operations for Login
@@ -22,12 +23,6 @@ func (c *LoginController) URLMapping() {
 	c.Mapping("Post", c.Post)
 }
 
-type JsonResult struct {
-	Error int32			`json:"error"`
-	Msg string 			`json:"msg"`
-	Data interface{}	`json:"data"`
-}
-
 // Post ...
 // @Title Create
 // @Description create Login
@@ -37,12 +32,12 @@ type JsonResult struct {
 // @router / [post]
 func (c *LoginController) Post() {
 
-	var result JsonResult
+	var result response.JsonResult
 
 	// login credentials
 	credentials := requests.LoginCredentials{}
 	if err := c.ParseForm(&credentials); err != nil {
-		result = JsonResult{Error: 100001, Msg: "error occurs when parsing login form"}
+		result = response.JsonResult{Error: 100001, Msg: "error occurs when parsing login form"}
 		logs.Error(&result, err)
 		c.Data["json"] = &result
 		c.ServeJSON()
@@ -55,7 +50,7 @@ func (c *LoginController) Post() {
 	valid := validation.Validation{}
 	passed, err := valid.Valid(&credentials)
 	if err != nil {
-		result = JsonResult{Error: 100002, Msg: "error occurs when validating login credentials"}
+		result = response.JsonResult{Error: 100002, Msg: "error occurs when validating login credentials"}
 		logs.Error(&result, err)
 		c.Data["json"] = &result
 		c.ServeJSON()
@@ -63,7 +58,7 @@ func (c *LoginController) Post() {
 	}
 
 	if !passed {
-		result = JsonResult{Error: 100003, Msg: "login credentials invalid"}
+		result = response.JsonResult{Error: 100003, Msg: "login credentials invalid"}
 		logs.Error(&result, valid.ErrorsMap)
 		c.Data["json"] = &result
 		c.ServeJSON()
@@ -75,7 +70,7 @@ func (c *LoginController) Post() {
 	user, err := models.GetUserByCredentials(&credentials)
 
 	if err != nil {
-		result = JsonResult{Error: 100005, Msg: "user not match"}
+		result = response.JsonResult{Error: 100005, Msg: "user not match"}
 		logs.Error(&result, err)
 		c.Data["json"] = &result
 		c.ServeJSON()
@@ -95,7 +90,7 @@ func (c *LoginController) Post() {
 	})
 
 	if err != nil {
-		result = JsonResult{Error: 100004, Msg: "error occurs when generating login token"}
+		result = response.JsonResult{Error: 100004, Msg: "error occurs when generating login token"}
 		logs.Error(&result, err)
 		c.Data["json"] = &result
 		c.ServeJSON()
@@ -108,7 +103,7 @@ func (c *LoginController) Post() {
 	}
 
 	// return token
-	result = JsonResult{Error: 0, Data: &tokenMap}
+	result = response.JsonResult{Error: 0, Data: &tokenMap}
 	c.Data["json"] = &result
 	c.ServeJSON()
 }
