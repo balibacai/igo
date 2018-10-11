@@ -10,12 +10,14 @@ import (
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"
+	"beego/bootstrap"
 )
 
 func init() {
 	_, file, _, _ := runtime.Caller(1)
-	apppath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, ".." + string(filepath.Separator))))
+	apppath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, "../../")))
 	beego.TestBeegoInit(apppath)
+	bootstrap.AppConfig()
 }
 
 // TestGet is a sample to run an endpoint test

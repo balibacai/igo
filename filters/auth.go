@@ -21,7 +21,7 @@ func Auth(ctx *context.Context) {
 	tokenString := ctx.Input.Header("token")
 	//fmt.Println("token:" + tokenString)
 
-	_, isExcept := authExcept[ctx.Request.RequestURI]
+	_, isExcept := authExcept[ctx.Request.URL.Path]
 	if isExcept {
 		return
 	}
