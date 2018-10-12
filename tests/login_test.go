@@ -57,13 +57,13 @@ func TestLoginByCredentials(t *testing.T) {
 			So(w.Body.Len(), ShouldBeGreaterThan, 0)
 		})
 		var result response.JsonResult
-		err := json.Unmarshal([]byte(w.Body.String()), &result)
+		err := json.Unmarshal(w.Body.Bytes(), &result)
 
 		Convey("The Result Should be Json Format", func() {
 			So(err, ShouldBeNil)
 		})
 
-		Convey("The Result Should Contain Token And Other Data", func() {
+		Convey("The Result Should Contain Token And expiredAt Data", func() {
 			So(result.Data, ShouldContainKey, "token")
 			So(result.Data, ShouldContainKey, "expiredAt")
 		})
