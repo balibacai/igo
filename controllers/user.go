@@ -4,12 +4,11 @@ import (
 	"beego/models"
 	"encoding/json"
 	"strconv"
-	"github.com/astaxie/beego"
 )
 
 //  UserController operations for User
 type UserController struct {
-	beego.Controller
+	baseController
 }
 
 // URLMapping ...

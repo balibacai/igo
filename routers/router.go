@@ -11,7 +11,6 @@ import (
 	"beego/controllers"
 
 	"github.com/astaxie/beego"
-	"beego/filters"
 )
 
 func init() {
@@ -23,7 +22,7 @@ func init() {
 				&controllers.LoginController{},
 			),
 		),
-		beego.NSBefore(filters.Auth),
+		//beego.NSBefore(filters.Auth),
 		beego.NSNamespace("/user",
 			beego.NSInclude(
 				&controllers.UserController{},
