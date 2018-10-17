@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/astaxie/beego/context"
 	"beego/extensions"
+	"beego/response"
 )
 
 var (
@@ -18,6 +19,9 @@ type LoginClaims struct {
 
 
 func Auth(ctx *context.Context) {
+
+	var result response.JsonResult
+
 	tokenString := ctx.Input.Header("token")
 	//fmt.Println("token:" + tokenString)
 
@@ -27,7 +31,8 @@ func Auth(ctx *context.Context) {
 	}
 
 	if len(tokenString) == 0 {
-		ctx.Redirect(302, "/login")
+		result = response.JsonResult{Error: 101001, Msg: "require token"}
+		ctx.Output.JSON(&result, false, false)
 		return
 	}
 
@@ -35,8 +40,8 @@ func Auth(ctx *context.Context) {
 	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &LoginClaims{})
 
 	if err != nil {
-		fmt.Println(err)
-		ctx.Redirect(302, "/login")
+		result = response.JsonResult{Error: 101002, Msg: "parse token error"}
+		ctx.Output.JSON(&result, false, false)
 		return
 	}
 
@@ -44,7 +49,8 @@ func Auth(ctx *context.Context) {
 	if claims, ok := token.Claims.(*LoginClaims); ok && token.Valid {
 		fmt.Printf("%v %v", claims.UserID, claims.StandardClaims.ExpiresAt)
 	} else {
-		fmt.Println(err)
-		ctx.Redirect(302, "/login")
+		result = response.JsonResult{Error: 101003, Msg: "token expired"}
+		ctx.Output.JSON(&result, false, false)
+		return
 	}
 }
