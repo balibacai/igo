@@ -56,7 +56,7 @@ func (this *baseController) initAuth() {
 	if claims, ok := token.Claims.(*filters.LoginClaims); ok && token.Valid {
 		user, err := models.GetUserById(claims.UserID)
 		if err != nil {
-			this.JsonOutput(response.JsonResult{Error: 101002, Msg: "parse token error"})
+			this.JsonOutput(response.JsonResult{Error: 101004, Msg: "user not exist"})
 		}
 		// assign user
 		this.user = user
