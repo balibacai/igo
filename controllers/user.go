@@ -4,6 +4,7 @@ import (
 	"beego/models"
 	"encoding/json"
 	"strconv"
+	"beego/response"
 )
 
 //  UserController operations for User
@@ -50,11 +51,10 @@ func (c *UserController) GetOne() {
 	id, _ := strconv.ParseInt(idStr, 0, 64)
 	v, err := models.GetUserById(id)
 	if err != nil {
-		c.Data["json"] = err.Error()
+		c.JsonOutput(response.JsonResult{Error: 102001, Msg: "user not exist"})
 	} else {
-		c.Data["json"] = v
+		c.JsonOutput(response.JsonResult{Error: 0, Data: &v})
 	}
-	c.ServeJSON()
 }
 
 // Put ...
