@@ -6,6 +6,7 @@ import (
 	"beego/response"
 	"github.com/astaxie/beego/httplib"
 	"fmt"
+	"github.com/astaxie/beego/logs"
 )
 
 // LoginController operations for Login
@@ -33,8 +34,15 @@ func (this *LoginController) Post() {
 	req.Param("email", this.GetString("email", ""))
 	req.Param("password", this.GetString("password", ""))
 	req.SetTimeout(time.Second / 2, time.Second)
-	req.ToJSON(&result)
+	err := req.ToJSON(&result)
 
-	this.Data["json"] = &result
-	this.ServeJSON()
+	if err != nil {
+		result = response.JsonResult{Error: 900000, Msg: "network error"}
+		this.Data["json"] = &result
+		logs.Error("network error", result, err)
+		this.ServeJSON()
+	} else {
+		this.Data["json"] = &result
+		this.ServeJSON()
+	}
 }
