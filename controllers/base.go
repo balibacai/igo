@@ -45,6 +45,7 @@ func (this *baseController) initAuth() {
 
 	if !strings.HasPrefix(tokenFullString, "Bearer ") {
 		this.JsonOutput(response.JsonResult{Error: 101001, Msg: "require token"})
+		return
 	}
 
 	tokenString := tokenFullString[7:]
@@ -57,6 +58,7 @@ func (this *baseController) initAuth() {
 	if err != nil {
 		logs.Error(err)
 		this.JsonOutput(response.JsonResult{Error: 101002, Msg: "parse token error"})
+		return
 	}
 
 	// validate & extract token
@@ -64,19 +66,20 @@ func (this *baseController) initAuth() {
 		user, err := models.GetUserById(claims.UserID)
 		if err != nil {
 			this.JsonOutput(response.JsonResult{Error: 101004, Msg: "user not exist"})
+			return
 		}
 		// assign user
 		this.user = user
 		this.isLogin = true
 	} else {
 		this.JsonOutput(response.JsonResult{Error: 101003, Msg: "token expired"})
+		return
 	}
 }
 
-// output json data and exit
-func (this *baseController) JsonOutput(data interface{})  {
+// output json data
+func (this *baseController) JsonOutput(data interface{}) {
 	this.Data["json"] = &data
 	this.ServeJSON()
-	this.StopRun()
 }
 
