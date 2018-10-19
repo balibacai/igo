@@ -21,8 +21,15 @@ func AppConfig()  {
 	orm.DefaultTimeLoc = time.UTC
 	orm.Debug = beego.AppConfig.DefaultBool("orm.debug", false)
 
-	// config jwt rsa public key
-	extensions.SetPublicKey(beego.AppConfig.String("jwt.public_key_pem_path"))
+	// config jwt
+	extensions.SetJWTMode(extensions.JWTMode(beego.AppConfig.DefaultInt("jwt.mode", 0)))
+	if jwtSecret := beego.AppConfig.String("jwt.secret"); len(jwtSecret) > 0 {
+		extensions.SetJWTSecret(jwtSecret)
+	}
+
+	if jwtPublicKeyPath := beego.AppConfig.String("jwt.public_key_pem_path"); len(jwtPublicKeyPath) > 0 {
+		extensions.SetJWTPublicKey(jwtPublicKeyPath)
+	}
 
 	// logs config
 	logs.SetLogger(beego.AppConfig.String("log.driver"))

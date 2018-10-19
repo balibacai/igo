@@ -52,7 +52,7 @@ func (this *baseController) initAuth() {
 	//fmt.Println("token:" + tokenString)
 
 	// parse token with claims
-	token, err := extensions.ParseRSAJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
+	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
 
 	if err != nil {
 		logs.Error(err)
