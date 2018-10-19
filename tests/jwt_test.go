@@ -11,8 +11,8 @@ import (
 
 func init() {
 	extensions.SetJWTSecret("123")
-	extensions.SetPrivateKey("../rsaprivatekey.pem")
-	extensions.SetPublicKey("../rsapublickey.pem")
+	extensions.SetJWTPrivateKey("../rsaprivatekey.pem")
+	extensions.SetJWTPublicKey("../rsapublickey.pem")
 }
 
 type LoginClaims struct {
@@ -22,6 +22,8 @@ type LoginClaims struct {
 
 // TestGet is a sample to run an endpoint test
 func TestJWTBuildAndParseToken(t *testing.T) {
+	extensions.SetJWTMode(extensions.JWTSecretMode)
+
 	now := time.Now()
 	userID := int64(1234567)
 	expiredAt := now.Unix() + 3600
@@ -60,11 +62,13 @@ func TestJWTBuildAndParseToken(t *testing.T) {
 }
 
 func TestRSAJWTBuildAndParseToken(t *testing.T) {
+	extensions.SetJWTMode(extensions.JWTRSAMode)
+
 	now := time.Now()
 	userID := int64(1234567)
 	expiredAt := now.Unix() + 3600
 
-	tokenString, err := extensions.NewRSAJWTTokenStringWithClaims(LoginClaims{
+	tokenString, err := extensions.NewJWTTokenStringWithClaims(LoginClaims{
 		userID,
 		jwt.StandardClaims {
 			ExpiresAt: expiredAt,
@@ -76,9 +80,10 @@ func TestRSAJWTBuildAndParseToken(t *testing.T) {
 		So(err, ShouldBeNil)
 	})
 
+	//fmt.Printf(tokenString)
 
 	// parse token with claims
-	token, err := extensions.ParseRSAJWTTokenWithClaims(tokenString, &LoginClaims{})
+	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &LoginClaims{})
 
 	Convey("parse err should be nil", t, func() {
 		So(err, ShouldBeNil)
@@ -90,6 +95,8 @@ func TestRSAJWTBuildAndParseToken(t *testing.T) {
 		So(ok, ShouldBeTrue)
 		So(token.Valid, ShouldBeTrue)
 	})
+
+	//fmt.Printf("%d", claims.UserID)
 
 	Convey("claims check", t, func() {
 		So(claims.UserID, ShouldEqual, userID)
