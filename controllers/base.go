@@ -8,6 +8,7 @@ import (
 	"beego/extensions"
 	"beego/filters"
 	"strings"
+	"github.com/astaxie/beego/logs"
 )
 
 type NestPreparer interface {
@@ -51,9 +52,10 @@ func (this *baseController) initAuth() {
 	//fmt.Println("token:" + tokenString)
 
 	// parse token with claims
-	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
+	token, err := extensions.ParseRSAJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
 
 	if err != nil {
+		logs.Error(err)
 		this.JsonOutput(response.JsonResult{Error: 101002, Msg: "parse token error"})
 	}
 

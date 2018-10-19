@@ -21,7 +21,8 @@ func AppConfig()  {
 	orm.DefaultTimeLoc = time.UTC
 	orm.Debug = beego.AppConfig.DefaultBool("orm.debug", false)
 
-	extensions.SetJWTSecret(beego.AppConfig.String("jwt.secret"))
+	// config jwt rsa public key
+	extensions.SetPublicKey(beego.AppConfig.String("jwt.public_key_pem_path"))
 
 	// logs config
 	logs.SetLogger(beego.AppConfig.String("log.driver"))

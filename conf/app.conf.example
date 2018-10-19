@@ -14,6 +14,7 @@ mysql.database   = "beego"
 log.driver = "console"
 log.level = 7
 
-jwt.secret = ""
+# jwt.secret = ""
+jwt.public_key_pem_path = "rsapublickey.pem"
 
 auth.url = "http://auth:8080"
