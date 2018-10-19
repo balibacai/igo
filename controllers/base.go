@@ -7,6 +7,7 @@ import (
 	"beego/response"
 	"beego/extensions"
 	"beego/filters"
+	"strings"
 )
 
 type NestPreparer interface {
@@ -38,12 +39,16 @@ func (this *baseController) Prepare() {
 func (this *baseController) initAuth() {
 	this.isLogin = false
 
-	tokenString := this.Ctx.Input.Header("token")
-	//fmt.Println("token:" + tokenString)
+	// get token from Authorization Header
+	tokenFullString := this.Ctx.Input.Header("Authorization")
 
-	if len(tokenString) == 0 {
+	if !strings.HasPrefix(tokenFullString, "Bearer ") {
 		this.JsonOutput(response.JsonResult{Error: 101001, Msg: "require token"})
 	}
+
+	tokenString := tokenFullString[7:]
+
+	//fmt.Println("token:" + tokenString)
 
 	// parse token with claims
 	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
