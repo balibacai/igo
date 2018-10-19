@@ -33,6 +33,12 @@
 			"revisionTime": "2018-07-31T13:18:48Z"
 		},
 		{
+			"checksumSHA1": "dWgEPq8x7MKYs5/W94TLusoh1b8=",
+			"path": "github.com/astaxie/beego/httplib",
+			"revision": "5b8e468a138596a4d5c39b5095e5cf3ab74675d1",
+			"revisionTime": "2018-10-05T13:16:18Z"
+		},
+		{
 			"checksumSHA1": "OksAzF6VvpfTlte99lpVNV+iSnY=",
 			"path": "github.com/astaxie/beego/logs",
 			"revision": "053a075344c118a5cc41981b29ef612bb53d20ca",

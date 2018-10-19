@@ -15,3 +15,5 @@ log.driver = "console"
 log.level = 7
 
 jwt.secret = ""
+
+auth.url = "http://auth:8080"
