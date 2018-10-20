@@ -5,7 +5,7 @@ conf/app.conf
 vendor/*
 !vendor/vendor.json
 
-beego
+igo
 *.tmp
 *.pem
 

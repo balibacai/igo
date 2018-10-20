@@ -2,11 +2,11 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"beego/models"
+	"igo/models"
 	"time"
-	"beego/response"
-	"beego/extensions"
-	"beego/filters"
+	"igo/response"
+	"igo/extensions"
+	"igo/filters"
 	"strings"
 	"github.com/astaxie/beego/logs"
 )

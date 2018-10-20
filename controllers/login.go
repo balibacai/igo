@@ -3,7 +3,7 @@ package controllers
 import (
 	"github.com/astaxie/beego"
 	"time"
-	"beego/response"
+	"igo/response"
 	"github.com/astaxie/beego/httplib"
 	"fmt"
 	"github.com/astaxie/beego/logs"

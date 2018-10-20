@@ -6,11 +6,11 @@ import (
 	"testing"
 	"runtime"
 	"path/filepath"
-	_ "beego/routers"
+	_ "igo/routers"
 
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"
-	"beego/bootstrap"
+	"igo/bootstrap"
 )
 
 func init() {

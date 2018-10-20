@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	. "github.com/smartystreets/goconvey/convey"
-	"beego/extensions"
+	"igo/extensions"
 	"github.com/dgrijalva/jwt-go"
 	"time"
 )

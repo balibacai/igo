@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"beego/models"
+	"igo/models"
 	"encoding/json"
 	"strconv"
-	"beego/response"
+	"igo/response"
 )
 
 //  UserController operations for User
