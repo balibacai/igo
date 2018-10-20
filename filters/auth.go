@@ -4,8 +4,8 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"fmt"
 	"github.com/astaxie/beego/context"
-	"igo/extensions"
 	"igo/response"
+	"github.com/mistcheng/ilib/ijwt"
 )
 
 var (
@@ -37,7 +37,7 @@ func Auth(ctx *context.Context) {
 	}
 
 	// parse token with claims
-	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &LoginClaims{})
+	token, err := ijwt.ParseJWTTokenWithClaims(tokenString, &LoginClaims{})
 
 	if err != nil {
 		result = response.JsonResult{Error: 101002, Msg: "parse token error"}

@@ -5,10 +5,10 @@ import (
 	"igo/models"
 	"time"
 	"igo/response"
-	"igo/extensions"
 	"igo/filters"
 	"strings"
 	"github.com/astaxie/beego/logs"
+	"github.com/mistcheng/ilib/ijwt"
 )
 
 type NestPreparer interface {
@@ -53,7 +53,7 @@ func (this *baseController) initAuth() {
 	//fmt.Println("token:" + tokenString)
 
 	// parse token with claims
-	token, err := extensions.ParseJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
+	token, err := ijwt.ParseJWTTokenWithClaims(tokenString, &filters.LoginClaims{})
 
 	if err != nil {
 		logs.Error(err)

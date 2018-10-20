@@ -45,12 +45,6 @@
 			"revisionTime": "2018-07-31T13:18:48Z"
 		},
 		{
-			"checksumSHA1": "3pGLaor7JnvIIy7dZvG7cbAlM9w=",
-			"path": "github.com/astaxie/beego/migration",
-			"revision": "053a075344c118a5cc41981b29ef612bb53d20ca",
-			"revisionTime": "2018-07-31T13:18:48Z"
-		},
-		{
 			"checksumSHA1": "skbVWA35zzQ+Yml14zyULI1OPic=",
 			"path": "github.com/astaxie/beego/orm",
 			"revision": "053a075344c118a5cc41981b29ef612bb53d20ca",
@@ -75,12 +69,6 @@
 			"revisionTime": "2018-07-31T13:18:48Z"
 		},
 		{
-			"checksumSHA1": "+mWpTLP462ZpvSOfcRcnPdBlaxM=",
-			"path": "github.com/astaxie/beego/validation",
-			"revision": "5b8e468a138596a4d5c39b5095e5cf3ab74675d1",
-			"revisionTime": "2018-10-05T13:16:18Z"
-		},
-		{
 			"checksumSHA1": "blOHP3HPYU+IeV6yWCalQuuM+zE=",
 			"path": "github.com/dgrijalva/jwt-go",
 			"revision": "3af4c746e1c248ee8491a3e0c6f7a9cd831e95f8",
@@ -97,6 +85,11 @@
 			"path": "github.com/jtolds/gls",
 			"revision": "77f18212c9c7edc9bd6a33d383a7b545ce62f064",
 			"revisionTime": "2017-05-03T22:40:06Z"
+		},
+		{
+			"checksumSHA1": "QsRwGeNyPv/g1AibnB4KbiIvZ1I=",
+			"path": "github.com/mistcheng/ilib/ijwt",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "IFtQxH02Qj36QooV+Z41enAh/hc=",
@@ -149,10 +142,6 @@
 			"revisionTime": "2018-07-31T13:18:48Z"
 		},
 		{
-			"path": "google.golang.org/appengine/cloudsql",
-			"revision": ""
-		},
-		{
 			"checksumSHA1": "ZSWoOPUNRr5+3dhkLK3C4cZAQPk=",
 			"origin": "github.com/astaxie/beego/vendor/gopkg.in/yaml.v2",
 			"path": "gopkg.in/yaml.v2",
@@ -160,5 +149,5 @@
 			"revisionTime": "2018-07-31T13:18:48Z"
 		}
 	],
-	"rootPath": "beego"
+	"rootPath": "igo"
 }
