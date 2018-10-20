@@ -2,13 +2,13 @@ package controllers
 
 import (
 	"github.com/astaxie/beego"
-	"igo/models"
-	"time"
-	"igo/response"
-	"igo/filters"
-	"strings"
 	"github.com/astaxie/beego/logs"
 	"github.com/mistcheng/ilib/ijwt"
+	"igo/filters"
+	"igo/models"
+	"igo/response"
+	"strings"
+	"time"
 )
 
 type NestPreparer interface {
@@ -20,7 +20,6 @@ type baseController struct {
 	user    *models.User
 	isLogin bool
 }
-
 
 func (this *baseController) Prepare() {
 	// page start time
@@ -82,4 +81,3 @@ func (this *baseController) JsonOutput(data interface{}) {
 	this.Data["json"] = &data
 	this.ServeJSON()
 }
-

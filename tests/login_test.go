@@ -1,26 +1,26 @@
 package test
 
 import (
+	_ "igo/routers"
 	"net/http"
 	"net/http/httptest"
-	"testing"
-	"runtime"
 	"path/filepath"
-	_ "igo/routers"
+	"runtime"
+	"testing"
 
+	"encoding/json"
 	"github.com/astaxie/beego"
 	. "github.com/smartystreets/goconvey/convey"
-	"net/url"
-	"strings"
-	"strconv"
 	"igo/bootstrap"
-	"encoding/json"
 	"igo/response"
+	"net/url"
+	"strconv"
+	"strings"
 )
 
 func init() {
 	_, file, _, _ := runtime.Caller(1)
-	apppath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, ".." + string(filepath.Separator), ".." + string(filepath.Separator))))
+	apppath, _ := filepath.Abs(filepath.Dir(filepath.Join(file, ".."+string(filepath.Separator), ".."+string(filepath.Separator))))
 	beego.TestBeegoInit(apppath)
 	bootstrap.AppConfig()
 }

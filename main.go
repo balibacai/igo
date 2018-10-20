@@ -3,8 +3,8 @@ package main
 import (
 	_ "igo/routers"
 
-	"igo/bootstrap"
 	"github.com/astaxie/beego"
+	"igo/bootstrap"
 )
 
 func init() {

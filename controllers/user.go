@@ -1,10 +1,10 @@
 package controllers
 
 import (
-	"igo/models"
 	"encoding/json"
-	"strconv"
+	"igo/models"
 	"igo/response"
+	"strconv"
 )
 
 //  UserController operations for User
