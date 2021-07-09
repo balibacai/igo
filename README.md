@@ -22,7 +22,7 @@ bee api . -tables="users" -driver=mysql -conn="$MYSQL_USERNAME:$MYSQL_PASSWORD@t
 bee generate scaffold user -fields="email:string,password:string" -driver="mysql" -conn="$MYSQL_USERNAME:$MYSQL_PASSWORD@tcp(db:3306)/$MYSQL_DATABASE"
 
 ```
-# new step by master
+# new step by master 2
 # migrate
 ```
 bee migrate -driver="mysql" -conn="$MYSQL_USERNAME:$MYSQL_PASSWORD@tcp(db:3306)/$MYSQL_DATABASE"
